@@ -1,102 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa interactivo - Calidad del Aire</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa de Contaminación Ambiental</title>
+  <link rel="stylesheet" href="mapa.css" />
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    #map {
-      height: 100vh; /* Ocupa toda la pantalla */
-      width: 100%;
-    }
-    .legend {
-      background: white;
-      padding: 8px;
-      border-radius: 6px;
-      line-height: 1.4;
-      font-size: 12px;
-    }
-    .legend span {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      margin-right: 5px;
-    }
-  </style>
 </head>
 <body>
+  <!-- === BARRA SUPERIOR === -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="nasa2.png" alt="NextAir Logo">
+    </div>
 
-  <div id="map"></div>
+    <nav class="nav-links">
+      <a href="index.html" >Inicio</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="pronóstico.html">Pronóstico</a>
+      <a href="al">Alertas</a>
+    </nav>
+      
+    <!-- Botón desplegable de idiomas -->
+    <div class="dropdown">
+      <button onclick="toggleDropdown()" class="dropbtn">🌐 Idioma</button>
+      <div id="languageDropdown" class="dropdown-content">
+        <a href="#" onclick="doTranslate('es')">Español</a>
+        <a href="#" onclick="doTranslate('en')">Inglés</a>
+        <a href="#" onclick="doTranslate('fr')">Francés</a>
+        <a href="#" onclick="doTranslate('de')">Alemán</a>
+        <a href="#" onclick="doTranslate('it')">Italiano</a>
+        <a href="#" onclick="doTranslate('pt')">Portugués</a>
+        <a href="#" onclick="doTranslate('zh-CN')">Chino</a>
+        <a href="#" onclick="doTranslate('ja')">Japonés</a>
+        <a href="#" onclick="doTranslate('ko')">Coreano</a>
+        <a href="#" onclick="doTranslate('ar')">Árabe</a>
+        <a href="#" onclick="doTranslate('ru')">Ruso</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Elemento oculto del traductor -->
+  <div id="google_translate_element"></div>
 
-  <script>
-    // Inicializar el mapa en Perú
-    var map = L.map('map').setView([-12.0464, -77.0428], 6);
+  <!-- === CONTENIDO === -->
+  <main id="contenido">
+    <h1>Mapa de Contaminación Ambiental</h1>
+    <h2>Visualización por contaminante</h2>
 
-    // Capa de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    <!-- === FILTRO DESPLEGABLE === -->
+    <div class="filtros">
+      <select id="filtro-contaminante" class="select-filtro">
+        <option value="no2">Dióxido de Nitrógeno (NO₂)</option>
+        <option value="o3">Ozono (O₃)</option>
+        <option value="hcho">Formaldehído (HCHO)</option>
+      </select>
+      <button id="btn-actualizar" class="btn-azul">Actualizar</button>
+    </div>
 
-    // Función para asignar color según ICA
-    function getColor(ica) {
-      return ica <= 50  ? "#4CAF50" : // Bueno
-             ica <= 100 ? "#FFEB3B" : // Moderado
-             ica <= 150 ? "#FF9800" : // Perjudicial
-             ica <= 200 ? "#F44336" : // Muy perjudicial
-                          "#7B1FA2";  // Peligroso
-    }
+    <!-- ELEMENTO DE CARGA -->
+    <div id="cargando" class="cargando oculto">
+      <div class="spinner"></div>
+      <p>Actualizando mapa...</p>
+    </div>
 
-    // Ejemplo de estaciones con ICA
-    var estaciones = [
-      { ciudad: "Ica", coords: [-14.0678, -75.7286], ica: 74 },
-      { ciudad: "Lima", coords: [-12.0464, -77.0428], ica: 39 },
-      { ciudad: "Arequipa", coords: [-16.4090, -71.5375], ica: 84 },
-      { ciudad: "Cusco", coords: [-13.5319, -71.9675], ica: 51 }
-    ];
+    <!-- === MAPA === -->
+    <div class="mapa-wrapper">
+      <!-- Coordenadas -->
+      <div class="latitudes superior"></div>
+      <div class="latitudes inferior"></div>
+      <div class="longitudes izquierda"></div>
+      <div class="longitudes derecha"></div>
 
-    // Agregar marcadores
-    estaciones.forEach(est => {
-      L.circleMarker(est.coords, {
-        radius: 10,
-        fillColor: getColor(est.ica),
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      }).addTo(map)
-        .bindPopup(`<b>${est.ciudad}</b><br>ICA: ${est.ica}`);
-    });
+      <!-- Contenedor del mapa -->
+      <div class="mapa-container">
+        <canvas id="mapa" width="800" height="500"></canvas>
+      </div>
+    </div>
 
-    // Leyenda
-    var legend = L.control({position: 'bottomright'});
+    <!-- Controles -->
+    <div class="controles">
+      <button id="zoom-in" class="btn-blanco">＋ Zoom In</button>
+      <button id="zoom-out" class="btn-blanco">－ Zoom Out</button>
+    </div>
+  </main>
 
-    legend.onAdd = function () {
-      var div = L.DomUtil.create('div', 'legend');
-      div.innerHTML = `
-        <b>Calidad del Aire (ICA)</b><br>
-        <span style="background:#4CAF50"></span> Bueno (0-50)<br>
-        <span style="background:#FFEB3B"></span> Moderado (51-100)<br>
-        <span style="background:#FF9800"></span> Perjudicial (101-150)<br>
-        <span style="background:#F44336"></span> Muy perjudicial (151-200)<br>
-        <span style="background:#7B1FA2"></span> Peligroso (200+)
-      `;
-      return div;
-    };
-
-    legend.addTo(map);
-  </script>
-
+  <script src="mapa.js"></script>
 </body>
 </html>
+
