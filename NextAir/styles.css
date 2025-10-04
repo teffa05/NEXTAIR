@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: 'Overpass', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background: #0042A6; /* Electric Blue */
+}
+
+.logo img {
+  height: 60px;
+}
+
+.nav-links a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.nav-links a:hover {
+  color: #EAEF07; /* Neon Yellow */
+}
+
+.btn-login {
+  background: #EAEF07; /* Neon Yellow */
+  color: #000;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background: #d4d900; /* tono más oscuro del amarillo */
+}
