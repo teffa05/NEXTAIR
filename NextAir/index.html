@@ -4,23 +4,250 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextAir</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Tipografía NASA Space Apps -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&family=Fira+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Overpass', sans-serif;
+      background-color: #ffffff;
+    }
+
+    /* === NAVBAR === */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 35px;
+      background: #0042A6; /* Electric Blue */
+    }
+
+    .logo img {
+      height: 55px;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: #EAEF07; /* Neon Yellow */
+    }
+
+    /* === BOTÓN DESPLEGABLE === */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: #EAEF07; /* Neon Yellow */
+      color: #000;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Overpass', sans-serif;
+    }
+
+    .dropbtn:hover {
+      background: #d8dc06;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      z-index: 10;
+      overflow-y: auto;
+      max-height: 200px;
+    }
+
+    .dropdown-content a {
+      color: #000;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .show {
+      display: block;
+    }
+
+    #google_translate_element { display: none; }
+
+    /* === CONTENIDO PRINCIPAL === */
+    #contenido {
+      display: none;
+      padding: 20px 30px;
+      max-width: 550px;
+      margin-left: 40px;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    #contenido h1 {
+      font-size: 16px;
+      color: #0042A6;
+      margin-bottom: 10px;
+    }
+
+    #contenido h2 {
+      font-size: 13px;
+      color: #0070f3;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    #contenido p {
+      font-size: 11.5px;
+      color: #333;
+      margin-bottom: 8px;
+      text-align: justify;
+      max-width: 520px;
+    }
+
+    .btn-descargar {
+      display: inline-block;
+      margin: 6px 6px 0 0;
+      padding: 6px 14px;
+      font-weight: bold;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 11px;
+    }
+
+    .btn-azul {
+      background: #0042A6;
+      color: white;
+    }
+
+    .btn-azul:hover {
+      background: #002f73;
+    }
+
+    .btn-blanco {
+      border: 2px solid #000;
+      color: #000;
+      background: #fff;
+    }
+
+    .btn-blanco:hover {
+      background: #f1f1f1;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- === BARRA SUPERIOR === -->
   <header class="navbar">
     <div class="logo">
-      <img src="nasa2.png">
+      <img src="nasa2.png" alt="NextAir Logo">
     </div>
+
     <nav class="nav-links">
-      <a href="#">Inicio</a>
+      <a onclick="mostrarContenido()">Inicio</a>
       <a href="#">Mapa</a>
       <a href="#">Pronóstico</a>
       <a href="#">Alertas</a>
     </nav>
-    <a href="#" class="btn-login">Iniciar sesión</a>
+
+    <!-- Botón desplegable de idiomas -->
+    <div class="dropdown">
+      <button onclick="toggleDropdown()" class="dropbtn">🌐 Idioma</button>
+      <div id="languageDropdown" class="dropdown-content">
+        <a href="#" onclick="doTranslate('es')">Español</a>
+        <a href="#" onclick="doTranslate('en')">Inglés</a>
+        <a href="#" onclick="doTranslate('fr')">Francés</a>
+        <a href="#" onclick="doTranslate('de')">Alemán</a>
+        <a href="#" onclick="doTranslate('it')">Italiano</a>
+        <a href="#" onclick="doTranslate('pt')">Portugués</a>
+        <a href="#" onclick="doTranslate('zh-CN')">Chino</a>
+        <a href="#" onclick="doTranslate('ja')">Japonés</a>
+        <a href="#" onclick="doTranslate('ko')">Coreano</a>
+        <a href="#" onclick="doTranslate('ar')">Árabe</a>
+        <a href="#" onclick="doTranslate('ru')">Ruso</a>
+      </div>
+    </div>
   </header>
+
+  <!-- Elemento oculto del traductor -->
+  <div id="google_translate_element"></div>
+
+  <!-- === CONTENIDO PRINCIPAL === -->
+  <section id="contenido">
+    <h1>¿Qué es el Índice de calidad del aire (ICA)? ¿Cómo se calcula?</h1>
+    <h2>El índice de calidad del aire (ICA) es un indicador que permite informar de la calidad del aire a la población de una manera clara, sencilla y unificada.</h2>
+    <p>Además, permite comparar la calidad del aire entre diferentes zonas, al tener criterios homogéneos que unifican su cálculo.</p>
+    <p>Las estaciones Kunak AIR permiten una <b>monitorización ambiental precisa</b> y en tiempo real de los principales contaminantes con un coste menor a los métodos tradicionales.</p>
+    <p>Proporcionan datos fiables según la norma europea CEN/TS 17660 y alcanzan los DQO de Clase 1, acorde a protocolos internacionales.</p>
+    <a href="#" class="btn-blanco btn-descargar">Ficha técnica →</a>
+    <a href="#" class="btn-azul btn-descargar">Catálogo →</a>
+  </section>
+
+  <script>
+    // Mostrar/ocultar contenido al presionar “Inicio”
+    function mostrarContenido() {
+      const section = document.getElementById("contenido");
+      section.style.display = section.style.display === "block" ? "none" : "block";
+    }
+
+    // Mostrar/ocultar menú de idiomas
+    function toggleDropdown() {
+      document.getElementById("languageDropdown").classList.toggle("show");
+    }
+
+    // Cerrar menú si se hace clic fuera
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].classList.remove('show');
+        }
+      }
+    }
+
+    // Inicializar Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+    }
+
+    // Traducir automáticamente al idioma seleccionado
+    function doTranslate(lang) {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+      } else {
+        alert("Cargando traductor... inténtalo en un momento.");
+      }
+    }
+  </script>
+
+  <!-- Carga el traductor -->
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
 
