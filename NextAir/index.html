@@ -46,14 +46,13 @@
     }
 
     .dropbtn {
-      background: #EAEF07; /* Neon Yellow */
+      background: #EAEF07;
       color: #000;
       padding: 6px 14px;
       border: none;
       border-radius: 8px;
       font-weight: bold;
       font-size: 12px;
-      text-decoration: none;
       cursor: pointer;
       transition: background-color 0.3s ease;
       font-family: 'Overpass', sans-serif;
@@ -97,7 +96,7 @@
 
     /* === CONTENIDO PRINCIPAL === */
     #contenido {
-      display: none;
+      display: block;
       padding: 20px 30px;
       max-width: 550px;
       margin-left: 40px;
@@ -168,12 +167,12 @@
     </div>
 
     <nav class="nav-links">
-      <a onclick="mostrarContenido()">Inicio</a>
-      <a href="#">Mapa</a>
-      <a href="#">Pronóstico</a>
-      <a href="#">Alertas</a>
+      <a href="Inicio.html" >Inicio</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="pronóstico.html">Pronóstico</a>
+      <a href="al">Alertas</a>
     </nav>
-
+      
     <!-- Botón desplegable de idiomas -->
     <div class="dropdown">
       <button onclick="toggleDropdown()" class="dropbtn">🌐 Idioma</button>
@@ -202,18 +201,12 @@
     <h2>El índice de calidad del aire (ICA) es un indicador que permite informar de la calidad del aire a la población de una manera clara, sencilla y unificada.</h2>
     <p>Además, permite comparar la calidad del aire entre diferentes zonas, al tener criterios homogéneos que unifican su cálculo.</p>
     <p>Las estaciones Kunak AIR permiten una <b>monitorización ambiental precisa</b> y en tiempo real de los principales contaminantes con un coste menor a los métodos tradicionales.</p>
-    <p>Proporcionan datos fiables según la norma europea CEN/TS 17660 y alcanzan los DQO de Clase 1, acorde a protocolos internacionales.</p>
-    <a href="#" class="btn-blanco btn-descargar">Ficha técnica →</a>
-    <a href="#" class="btn-azul btn-descargar">Catálogo →</a>
+    <P>El Índice de Calidad del Aire (ICA) es un indicador que traduce los niveles de contaminación del aire en una escala comprensible para el público. Su objetivo es informar de forma clara y rápida sobre qué tan saludable es el aire que respiramos en un lugar determinado.</P>
+    <P>El ICA se basa en la concentración de cinco contaminantes principales:</P>
+
   </section>
 
   <script>
-    // Mostrar/ocultar contenido al presionar “Inicio”
-    function mostrarContenido() {
-      const section = document.getElementById("contenido");
-      section.style.display = section.style.display === "block" ? "none" : "block";
-    }
-
     // Mostrar/ocultar menú de idiomas
     function toggleDropdown() {
       document.getElementById("languageDropdown").classList.toggle("show");
@@ -250,5 +243,10 @@
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
+
+
+
+
 
 
