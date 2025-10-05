@@ -1,115 +1,52 @@
+/* Tipografía y fondo */
 body {
   font-family: 'Overpass', sans-serif;
-  background-color: #f9f9f9;
+  background: #f8f9fa;
+  margin: 0;
 }
 
-/* NAVBAR */
-.navbar {
-  background-color: #0042A6 !important;
-}
-.navbar-brand img {
-  height: 50px;
-}
-.nav-link {
-  color: white !important;
-  font-weight: 700;
-  font-size: 14px;
-  margin: 0 10px;
-}
-.nav-link:hover {
-  color: #EAEF07 !important;
-}
+/* NAVBAR (tu estilo original) */
+.navbar { background-color: #0042A6 !important; }
+.navbar-brand img { height: 50px; }
+.nav-link { color: white !important; font-weight: 700; font-size: 14px; margin: 0 10px; }
+.nav-link:hover { color: #EAEF07 !important; }
+.dropbtn { background:#EAEF07; color:#000; border:none; border-radius:8px; font-weight:bold; font-size:13px; padding:7px 15px; cursor:pointer; }
+.dropbtn:hover { background:#d8dc06; }
 
-/* Botón idioma */
-.dropbtn {
-  background: #EAEF07;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 13px;
-  padding: 7px 15px;
-  cursor: pointer;
-}
-.dropbtn:hover {
-  background: #d8dc06;
-}
-.dropdown-menu a {
-  font-size: 13px;
-  font-weight: 600;
-  color: #000;
-}
-.dropdown-menu a:hover {
-  background-color: #f1f1f1;
-}
-#google_translate_element {
-  display: none;
-}
+/* FILTROS arriba */
+.filtros-row { padding: 0 12px; }
+#dropdownContaminantes { max-width: 360px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* MAPA */
-.map-container {
-  width: 100%;
-  height: 500px;
-  background: #d9e6f2;
-  border-radius: 12px;
-}
+/* checklist compacta */
+.contaminantes-lista { max-height: 180px; overflow-y: auto; }
+.form-check.compact { padding: 4px 6px; margin: 0; }
+.form-check.compact .form-check-input { width: 14px; height: 14px; margin-top: 3px; }
+.form-check.compact .form-check-label { font-size: 13px; margin-left: 6px; }
 
-/* FILTROS */
-.filtros {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Dropdown checklist */
-.dropdown-checklist {
-  position: relative;
-}
-.dropdown-checklist-btn {
-  width: 100%;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px;
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
-}
-.dropdown-checklist-content {
-  display: none;
-  position: absolute;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-height: 140px;
-  overflow-y: auto;
-  z-index: 10;
-}
-.dropdown-checklist-content label {
-  display: block;
-  padding: 5px 10px;
-  font-size: 13px;
-}
-.dropdown-checklist-content label:hover {
-  background-color: #f1f1f1;
-}
-.show { display: block; }
+/* MAPA interactivo */
+.mapa-interactivo { height: 500px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+.mapa-externo { height: 240px; border: 2px dashed #d0d0d0; border-radius: 8px; background: #fff; }
 
 /* LEYENDA */
-.legend ul {
-  padding-left: 0;
-}
-.legend li {
-  margin-bottom: 6px;
-}
-.color-box {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  border-radius: 3px;
-}
+.leyenda { background: #fff; border: 1px solid #e8e8e8; }
+.color-box { display:inline-block; width:16px; height:16px; margin-right:8px; vertical-align:middle; border-radius:3px; border:1px solid #ccc; }
 
+/* RESULTADOS items */
+.resultados .item { background:#fafafa; border:1px solid #eee; padding:8px; border-radius:8px; margin-bottom:8px; font-size:13px; line-height:1.2; display:flex; gap:8px; align-items:center; }
+.resultados .color-swatch { width:14px; height:14px; border-radius:3px; border:1px solid #ccc; flex: 0 0 auto; }
+.resultados .detalle { flex: 1 1 auto; }
+.resultados .detalle strong { display:block; color:#0042A6; font-weight:700; }
+
+/* Nivel colors (aplicar a span dentro del item si necesario) */
+.nivel-verde { color: green; font-weight:700; }
+.nivel-amarillo { color: #b38f00; font-weight:700; }
+.nivel-naranja { color: orange; font-weight:700; }
+.nivel-rojo { color: red; font-weight:700; }
+.nivel-morado { color: purple; font-weight:700; }
+
+/* Responsive: mobile tweaks */
+@media (max-width: 991px) {
+  .navbar-nav.mx-auto.text-center.d-lg-none { background-color:#0960E1 !important; }
+  .mapa-interactivo { height: 360px; }
+}
 
