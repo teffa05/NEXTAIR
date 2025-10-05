@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapa de Contaminación Ambiental</title>
+  <title>Mapa de Contaminantes - NextAir</title>
   <link rel="stylesheet" href="mapa.css" />
-
 </head>
 <body>
   <!-- === BARRA SUPERIOR === -->
@@ -15,12 +14,12 @@
     </div>
 
     <nav class="nav-links">
-      <a href="index.html" >Inicio</a>
-      <a href="mapa.html">Mapa</a>
+      <a href="index.html">Inicio</a>
+      <a href="mapa.html" class="activo">Mapa</a>
       <a href="pronóstico.html">Pronóstico</a>
-      <a href="al">Alertas</a>
+      <a href="alertas.html">Alertas</a>
     </nav>
-      
+
     <!-- Botón desplegable de idiomas -->
     <div class="dropdown">
       <button onclick="toggleDropdown()" class="dropbtn">🌐 Idioma</button>
@@ -43,49 +42,52 @@
   <!-- Elemento oculto del traductor -->
   <div id="google_translate_element"></div>
 
-  <!-- === CONTENIDO === -->
-  <main id="contenido">
-    <h1>Mapa de Contaminación Ambiental</h1>
-    <h2>Visualización por contaminante</h2>
+  <!-- === CONTENIDO PRINCIPAL === -->
+  <main class="contenedor">
+    <h1>Mapa de Contaminantes Atmosféricos</h1>
 
-    <!-- === FILTRO DESPLEGABLE === -->
-    <div class="filtros">
-      <select id="filtro-contaminante" class="select-filtro">
-        <option value="no2">Dióxido de Nitrógeno (NO₂)</option>
-        <option value="o3">Ozono (O₃)</option>
-        <option value="hcho">Formaldehído (HCHO)</option>
-      </select>
-      <button id="btn-actualizar" class="btn-azul">Actualizar</button>
-    </div>
-
-    <!-- ELEMENTO DE CARGA -->
-    <div id="cargando" class="cargando oculto">
-      <div class="spinner"></div>
-      <p>Actualizando mapa...</p>
-    </div>
-
-    <!-- === MAPA === -->
-    <div class="mapa-wrapper">
-      <!-- Coordenadas -->
-      <div class="latitudes superior"></div>
-      <div class="latitudes inferior"></div>
-      <div class="longitudes izquierda"></div>
-      <div class="longitudes derecha"></div>
-
-      <!-- Contenedor del mapa -->
-      <div class="mapa-container">
-        <canvas id="mapa" width="800" height="500"></canvas>
+    <!-- FILTROS -->
+    <section class="filtros">
+      <div class="filtro">
+        <label for="contaminante">Contaminante:</label>
+        <select id="contaminante">
+          <option value="no2">Dióxido de Nitrógeno (NO₂)</option>
+          <option value="o3">Ozono (O₃)</option>
+          <option value="hcho">Formaldehído (HCHO)</option>
+        </select>
       </div>
-    </div>
 
-    <!-- Controles -->
-    <div class="controles">
-      <button id="zoom-in" class="btn-blanco">＋ Zoom In</button>
-      <button id="zoom-out" class="btn-blanco">－ Zoom Out</button>
-    </div>
+      <div class="filtro">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" />
+      </div>
+
+      <div class="filtro">
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" />
+      </div>
+
+      <button id="btnActualizar" disabled>Actualizar</button>
+      <span id="mensajeError" class="mensaje-error oculto">⚠️ Completa todos los filtros antes de actualizar.</span>
+    </section>
+
+    <!-- MAPA -->
+    <section class="mapa-contenedor">
+      <div class="regla regla-vertical"></div>
+      <div class="regla regla-horizontal"></div>
+
+      <div id="mapa">
+        <div id="loader" class="oculto">Cargando...</div>
+        <canvas id="mapaCanvas"></canvas>
+      </div>
+
+      <div class="controles-zoom">
+        <button id="zoomIn">+</button>
+        <button id="zoomOut">−</button>
+      </div>
+    </section>
   </main>
 
   <script src="mapa.js"></script>
 </body>
 </html>
-

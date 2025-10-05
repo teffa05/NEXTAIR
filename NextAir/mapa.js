@@ -1,88 +1,129 @@
-const btnActualizar = document.getElementById("btn-actualizar");
-const cargando = document.getElementById("cargando");
-const filtro = document.getElementById("filtro-contaminante");
-const canvas = document.getElementById("mapa");
+// === TRADUCTOR ===
+function toggleDropdown() {
+  document.getElementById("languageDropdown").classList.toggle("show");
+}
+
+function doTranslate(lang) {
+  console.log("Traducción simulada:", lang);
+}
+
+// === MAPA ===
+const canvas = document.getElementById("mapaCanvas");
 const ctx = canvas.getContext("2d");
-const zoomIn = document.getElementById("zoom-in");
-const zoomOut = document.getElementById("zoom-out");
+const loader = document.getElementById("loader");
+const btnActualizar = document.getElementById("btnActualizar");
+const mensajeError = document.getElementById("mensajeError");
 
 let zoom = 1;
 
-// Coordenadas simuladas (ejes del mapa)
-const latitudes = ["-3.75°", "-3.70°", "-3.65°", "-3.60°", "-3.55°", "-3.50°"];
-const longitudes = ["-73.50°", "-73.45°", "-73.40°", "-73.35°", "-73.30°", "-73.25°"];
+function dibujarMapa() {
+  const ancho = (canvas.width = canvas.offsetWidth);
+  const alto = (canvas.height = canvas.offsetHeight);
 
-// Insertar coordenadas dinámicamente
-document.querySelector(".latitudes.superior").innerHTML = latitudes.map(l => `<span>${l}</span>`).join("");
-document.querySelector(".latitudes.inferior").innerHTML = latitudes.map(l => `<span>${l}</span>`).join("");
-document.querySelector(".longitudes.izquierda").innerHTML = longitudes.map(l => `<span>${l}</span>`).join("");
-document.querySelector(".longitudes.derecha").innerHTML = longitudes.map(l => `<span>${l}</span>`).join("");
+  ctx.clearRect(0, 0, ancho, alto);
+  ctx.fillStyle = "#e6f2ff";
+  ctx.fillRect(0, 0, ancho, alto);
 
-// === DIBUJAR MAPA BASE ===
-function dibujarMapa(tipo) {
-  ctx.save();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.scale(zoom, zoom);
-
-  // Fondo
-  ctx.fillStyle = "#e0f7fa";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Simular zonas de contaminación
-  if (tipo === "no2") {
-    ctx.fillStyle = "rgba(255, 0, 0, 0.4)"; // rojo
-  } else if (tipo === "o3") {
-    ctx.fillStyle = "rgba(0, 0, 255, 0.4)"; // azul
-  } else {
-    ctx.fillStyle = "rgba(0, 255, 0, 0.4)"; // verde
+  // Cuadrícula
+  ctx.strokeStyle = "#b3d1ff";
+  for (let x = 0; x < ancho; x += 50 * zoom) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, alto);
+    ctx.stroke();
+  }
+  for (let y = 0; y < alto; y += 50 * zoom) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(ancho, y);
+    ctx.stroke();
   }
 
-  // Dibujar áreas irregulares
-  for (let i = 0; i < 8; i++) {
+  // Puntos contaminantes simulados
+  const tipo = document.getElementById("contaminante").value;
+  let color;
+  switch (tipo) {
+    case "no2": color = "rgba(255,0,0,0.6)"; break;
+    case "o3": color = "rgba(0,128,255,0.6)"; break;
+    case "hcho": color = "rgba(255,165,0,0.6)"; break;
+    default: color = "rgba(0,0,0,0.3)";
+  }
+
+  for (let i = 0; i < 25; i++) {
+    const x = Math.random() * ancho;
+    const y = Math.random() * alto;
+    const r = 10 * zoom;
     ctx.beginPath();
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
-    const r = 50 + Math.random() * 80;
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = color;
     ctx.fill();
   }
-
-  // Líneas de cuadrícula
-  ctx.strokeStyle = "rgba(0,0,0,0.1)";
-  for (let i = 0; i < 10; i++) {
-    ctx.beginPath();
-    ctx.moveTo(0, (i + 1) * 50);
-    ctx.lineTo(canvas.width, (i + 1) * 50);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo((i + 1) * 80, 0);
-    ctx.lineTo((i + 1) * 80, canvas.height);
-    ctx.stroke();
-  }
-
-  ctx.restore();
 }
 
-// Inicializar mapa
-dibujarMapa("no2");
+// === Validación de filtros ===
+function validarFiltros() {
+  const contaminante = document.getElementById("contaminante").value;
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
 
-// === BOTÓN ACTUALIZAR ===
+  if (contaminante && fecha && hora) {
+    btnActualizar.disabled = false;
+    mensajeError.classList.add("oculto");
+  } else {
+    btnActualizar.disabled = true;
+  }
+}
+
+document.getElementById("contaminante").addEventListener("change", validarFiltros);
+document.getElementById("fecha").addEventListener("change", validarFiltros);
+document.getElementById("hora").addEventListener("change", validarFiltros);
+
+// === Evento Actualizar ===
 btnActualizar.addEventListener("click", () => {
-  cargando.classList.remove("oculto");
+  const contaminante = document.getElementById("contaminante").value;
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
+
+  if (!contaminante || !fecha || !hora) {
+    mensajeError.classList.remove("oculto");
+    return;
+  }
+
+  mensajeError.classList.add("oculto");
+  loader.classList.remove("oculto");
+
   setTimeout(() => {
-    cargando.classList.add("oculto");
-    dibujarMapa(filtro.value);
-  }, 1500);
+    loader.classList.add("oculto");
+    dibujarMapa();
+  }, 1000);
 });
 
-// === ZOOM ===
-zoomIn.addEventListener("click", () => {
-  zoom += 0.2;
-  dibujarMapa(filtro.value);
+// === Zoom ===
+document.getElementById("zoomIn").addEventListener("click", () => {
+  zoom *= 1.2;
+  dibujarMapa();
 });
 
-zoomOut.addEventListener("click", () => {
-  if (zoom > 0.6) zoom -= 0.2;
-  dibujarMapa(filtro.value);
+document.getElementById("zoomOut").addEventListener("click", () => {
+  zoom /= 1.2;
+  dibujarMapa();
 });
 
+// === Reglas ===
+function generarReglas() {
+  const reglaH = document.querySelector(".regla-horizontal");
+  const reglaV = document.querySelector(".regla-vertical");
+  reglaH.innerHTML = "";
+  reglaV.innerHTML = "";
+
+  for (let i = 0; i <= 5; i++) {
+    reglaH.innerHTML += `<span>${(i * 10 + 70).toFixed(2)}°</span>`;
+    reglaV.innerHTML += `<span>${(i * -5 + 10).toFixed(2)}°</span>`;
+  }
+}
+
+window.addEventListener("load", () => {
+  generarReglas();
+  dibujarMapa();
+  validarFiltros(); // inicia con el botón desactivado
+});
