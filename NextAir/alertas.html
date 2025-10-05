@@ -1,0 +1,355 @@
+<!DOCTYPE html> <!-- Define el tipo de documento HTML5 -->
+<html lang="es"> <!-- Idioma del sitio: español -->
+<head>
+  <meta charset="UTF-8"> <!-- Permite usar caracteres especiales como tildes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que se adapte a móviles -->
+  <title>Calidad del aire - NextAir</title> <!-- Título de la pestaña del navegador -->
+
+  <!-- Fuente desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======== ESTILOS GENERALES ======== */
+    body {
+      margin: 0; /* Quita márgenes por defecto */
+      font-family: 'Overpass', sans-serif; /* Aplica la fuente */
+      background: white; /* Fondo blanco */
+    }
+
+    /* ======== NAVBAR (barra superior azul) ======== */
+    .navbar {
+      display: flex; /* Usa flexbox para organizar el contenido */
+      justify-content: space-between; /* Espacia los elementos a los lados */
+      align-items: center; /* Centra verticalmente */
+      padding: 12px 40px; /* Espaciado interno */
+      background: #0042A6; /* Color azul de fondo */
+    }
+
+    .logo img {
+      height: 60px; /* Tamaño del logo */
+    }
+
+    .nav-links a {
+      color: white; /* Texto blanco */
+      margin: 0 15px; /* Separación entre enlaces */
+      text-decoration: none; /* Sin subrayado */
+      font-weight: 700; /* Negrita */
+    }
+
+    .nav-links a:hover {
+      color: #EAEF07; /* Cambia a amarillo al pasar el cursor */
+    }
+
+    .btn-login {
+      background: #EAEF07; /* Fondo amarillo */
+      color: #000; /* Texto negro */
+      padding: 8px 18px; /* Espaciado interno */
+      border-radius: 10px; /* Bordes redondeados */
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s; /* Suaviza el efecto hover */
+    }
+
+    .btn-login:hover {
+      background: #d4d900; /* Amarillo más oscuro al pasar el cursor */
+    }
+
+    /* ======== CONTENEDOR PRINCIPAL ======== */
+    .container {
+      max-width: 900px; /* Ancho máximo */
+      margin: 50px auto; /* Centrado horizontal con margen vertical */
+      padding: 20px;
+      text-align: center; /* Centra el texto dentro */
+    }
+
+    .titulo {
+      font-size: 46px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    /* ======== TARJETAS ======== */
+    .card {
+      border-radius: 15px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra suave */
+      margin-bottom: 25px;
+      color: #000;
+      text-align: left;
+    }
+
+    .left {
+      flex: 1; /* Ocupa el espacio restante */
+    }
+
+    .right {
+      flex: 0 0 250px; /* Ancho fijo de 250px */
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .right h2 {
+      font-size: 36px;
+      margin: 0;
+    }
+
+    .right span {
+      display: block;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .detalles {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .detalles p {
+      margin: 5px 0;
+    }
+
+    .clima {
+      display: flex; /* Distribuye los íconos de clima en fila */
+      justify-content: space-around;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .clima div {
+      display: flex;
+      align-items: center;
+      gap: 5px; /* Espacio entre emoji y texto */
+    }
+
+    .emoji {
+      font-size: 18px; /* Tamaño del emoji */
+    }
+
+    /* ======== LEYENDA DE COLORES ======== */
+    .leyenda {
+      display: flex;
+      flex-direction: column; /* Elementos uno debajo de otro */
+      align-items: flex-start;
+      margin: 40px auto; /* Centrada horizontalmente */
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ligera */
+      padding: 15px 20px;
+    }
+
+    .leyenda h3 {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .nivel {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 3px 0;
+    }
+
+    .color-box {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      border-radius: 3px;
+    }
+
+    /* Colores de niveles de calidad del aire */
+    .buena { background: #4CAF50; } /* Verde */
+    .moderada { background: #FFEB3B; } /* Amarillo */
+    .insalubre-sensibles { background: #FF9800; } /* Naranja */
+    .insalubre { background: #F44336; } /* Rojo */
+    .muy-insalubre { background: #7B1FA2; } /* Morado */
+  </style>
+</head>
+
+<body>
+  <!-- ======== NAVBAR ======== -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="nasa2.png" alt="NextAir Logo"> <!-- Logo -->
+    </div>
+
+    <!-- Enlaces de navegación -->
+    <nav class="nav-links">
+      <a href="Inicio.html">Inicio</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="pronostico.html">Pronóstico</a>
+      <a href="alertas.html">Alertas</a>
+    </nav>
+
+    <!-- Botón de idioma -->
+    <a href="#" class="btn-login">🌐 Idioma</a>
+  </header>
+
+  <!-- ======== CONTENIDO PRINCIPAL ======== -->
+  <div class="container">
+    <h1 class="titulo">CALIDAD DE AIRE</h1>
+    <!-- Aquí se mostrará la hora actual -->
+    <p class="descripcion">Índice de calidad del aire (ICA) y contaminación del aire</p>
+    <!-- FECHA ABAJO -->
+    <p id="fecha-hora">--:--, --- --</p>
+
+    <!-- ======== LEYENDA CENTRADA ======== -->
+    <div class="leyenda">
+      <h3>Estado de la calidad del aire</h3>
+      <div class="nivel"><div class="color-box buena"></div> BUENA</div>
+      <div class="nivel"><div class="color-box moderada"></div> MODERADA</div>
+      <div class="nivel"><div class="color-box insalubre-sensibles"></div> INSALUBRE PARA GRUPOS SENSIBLES</div>
+      <div class="nivel"><div class="color-box insalubre"></div> INSALUBRE</div>
+      <div class="nivel"><div class="color-box muy-insalubre"></div> MUY INSALUBRE</div>
+    </div>
+
+    <!-- ======== TARJETAS DE CADA NIVEL ======== -->
+
+    <!-- BUENA -->
+    <div class="card" style="background:#A5D6A7;">
+      <div class="left">
+        <h2>ICA: <b>35</b> (Buena)</h2>
+        <div class="detalles">
+          <p><b>Contaminante principal:</b> PM2.5</p>
+          <p><b>Concentración:</b> 7 µg/m³</p>
+          <p><b>Ubicación:</b> Loreto, Perú</p>
+        </div>
+        <div class="clima">
+          <div><span class="emoji">☀️</span> 32°C</div>
+          <div><span class="emoji">💨</span> 4.1 km/h</div>
+          <div><span class="emoji">💧</span> 55%</div>
+        </div>
+      </div>
+      <div class="right" style="background:#4CAF50;">
+        <h2>35</h2>
+        <span>Buena</span>
+        <span>PM2.5: 7 µg/m³</span>
+      </div>
+    </div>
+
+    <!-- MODERADA -->
+    <div class="card" style="background:#FFF9C4;">
+      <div class="left">
+        <h2>ICA: <b>80</b> (Moderada)</h2>
+        <div class="detalles">
+          <p><b>Contaminante principal:</b> PM10</p>
+          <p><b>Concentración:</b> 25 µg/m³</p>
+          <p><b>Ubicación:</b> San Martín, Perú</p>
+        </div>
+        <div class="clima">
+          <div><span class="emoji">🌤️</span> 30°C</div>
+          <div><span class="emoji">💨</span> 3.8 km/h</div>
+          <div><span class="emoji">💧</span> 61%</div>
+        </div>
+      </div>
+      <div class="right" style="background:#FFEB3B; color:#000;">
+        <h2>80</h2>
+        <span>Moderada</span>
+        <span>PM10: 25 µg/m³</span>
+      </div>
+    </div>
+
+    <!-- INSALUBRE PARA GRUPOS SENSIBLES -->
+    <div class="card" style="background:#FFE0B2;">
+      <div class="left">
+        <h2>ICA: <b>120</b> (Insalubre para grupos sensibles)</h2>
+        <div class="detalles">
+          <p><b>Contaminante principal:</b> O₃</p>
+          <p><b>Concentración:</b> 90 µg/m³</p>
+          <p><b>Ubicación:</b> Amazonas, Perú</p>
+        </div>
+        <div class="clima">
+          <div><span class="emoji">🌥️</span> 29°C</div>
+          <div><span class="emoji">💨</span> 3.2 km/h</div>
+          <div><span class="emoji">💧</span> 64%</div>
+        </div>
+      </div>
+      <div class="right" style="background:#FF9800;">
+        <h2>120</h2>
+        <span>Insalubre p/grupos sensibles</span>
+        <span>O₃: 90 µg/m³</span>
+      </div>
+    </div>
+
+    <!-- INSALUBRE -->
+    <div class="card" style="background:#FFCDD2;">
+      <div class="left">
+        <h2>ICA: <b>180</b> (Insalubre)</h2>
+        <div class="detalles">
+          <p><b>Contaminante principal:</b> PM2.5</p>
+          <p><b>Concentración:</b> 55 µg/m³</p>
+          <p><b>Ubicación:</b> Ucayali, Perú</p>
+        </div>
+        <div class="clima">
+          <div><span class="emoji">☁️</span> 28°C</div>
+          <div><span class="emoji">💨</span> 2.9 km/h</div>
+          <div><span class="emoji">💧</span> 70%</div>
+        </div>
+      </div>
+      <div class="right" style="background:#F44336;">
+        <h2>180</h2>
+        <span>Insalubre</span>
+        <span>PM2.5: 55 µg/m³</span>
+      </div>
+    </div>
+
+    <!-- MUY INSALUBRE -->
+    <div class="card" style="background:#E1BEE7;">
+      <div class="left">
+        <h2>ICA: <b>250</b> (Muy Insalubre)</h2>
+        <div class="detalles">
+          <p><b>Contaminante principal:</b> SO₂</p>
+          <p><b>Concentración:</b> 180 µg/m³</p>
+          <p><b>Ubicación:</b> Lima, Perú</p>
+        </div>
+        <div class="clima">
+          <div><span class="emoji">🌫️</span> 27°C</div>
+          <div><span class="emoji">💨</span> 3.4 km/h</div>
+          <div><span class="emoji">💧</span> 72%</div>
+        </div>
+      </div>
+      <div class="right" style="background:#7B1FA2;">
+        <h2>250</h2>
+        <span>Muy Insalubre</span>
+        <span>SO₂: 180 µg/m³</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SCRIPT PARA ACTUALIZAR HORA ======== -->
+  <script>
+    /* Función que actualiza la hora actual */
+    function actualizarHora() {
+      const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+      const ahora = new Date();
+      const horas = ahora.getHours().toString().padStart(2,'0');
+      const minutos = ahora.getMinutes().toString().padStart(2,'0');
+      const dia = ahora.getDate();
+      const mes = meses[ahora.getMonth()];
+      document.getElementById("fecha-hora").textContent = `${horas}:${minutos}, ${mes} ${dia}`;
+    }
+
+    actualizarHora(); // Llama una vez al cargar la página
+    setInterval(actualizarHora, 60000); // Actualiza cada minuto
+  </script>
+</body>
+</html>
