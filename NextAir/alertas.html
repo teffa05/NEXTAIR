@@ -1,108 +1,132 @@
-<!DOCTYPE html> <!-- Define el tipo de documento HTML5 -->
-<html lang="es"> <!-- Idioma del sitio: español -->
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8"> <!-- Permite usar caracteres especiales como tildes -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptación móvil -->
-  <title>Calidad del aire - NextAir</title> <!-- Título de la pestaña -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calidad del aire - NextAir</title>
 
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     /* ======== ESTILOS GENERALES ======== */
     body {
       margin: 0;
       font-family: 'Overpass', sans-serif;
-      background: white;
+      background: #f9fafc;
+      color: #222;
     }
 
     /* ======== NAVBAR ======== */
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 40px;
-      background: #0042A6;
+      background-color: #0042A6 !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: background-color 0.3s ease;
     }
 
-    .logo img {
-      height: 60px;
+    .navbar-brand img {
+      height: 50px;
+      transition: transform 0.3s ease;
     }
 
-    .nav-links a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 700;
+    .navbar-brand img:hover {
+      transform: scale(1.05);
     }
 
-    .nav-links a:hover {
-      color: #EAEF07;
+    .nav-link {
+      color: white !important;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 0 12px;
+      transition: color 0.3s ease;
     }
 
-    .btn-login {
+    .nav-link:hover {
+      color: #EAEF07 !important;
+    }
+
+    /* ======== BOTÓN IDIOMA ======== */
+    .dropbtn {
       background: #EAEF07;
       color: #000;
-      padding: 8px 18px;
-      border-radius: 10px;
+      border: none;
+      border-radius: 8px;
       font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
+      font-size: 13px;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    .btn-login:hover {
-      background: #d4d900;
+    .dropbtn:hover {
+      background: #d8dc06;
     }
 
-    /* ======== CONTENEDOR PRINCIPAL ======== */
+    .dropdown-menu a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f1f1f1;
+    }
+
+    #google_translate_element {
+      display: none;
+    }
+
+    /* ======== CONTENIDO PRINCIPAL ======== */
     .container {
       max-width: 900px;
-      margin: 50px auto;
+      margin: 60px auto;
       padding: 20px;
       text-align: center;
     }
 
     .titulo {
-      font-size: 46px;
+      font-size: 48px;
       font-weight: 700;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      color: #0042A6;
+      text-transform: uppercase;
     }
 
-    .subtitulo {
+    .descripcion {
       font-size: 20px;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    #fecha-hora {
+      font-size: 15px;
       color: #555;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
     }
 
     /* ======== TARJETAS ======== */
     .card {
-      font-family: 'Poppins', sans-serif; /* <=== Nueva fuente solo para las tarjetas */
-      border-radius: 15px;
+      border-radius: 16px;
       padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.15);
       margin-bottom: 25px;
       color: #000;
       text-align: left;
-      line-height: 1.5;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .card h2 {
-      font-weight: 700;
-      letter-spacing: 0.5px;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
     }
 
-    .card p, 
-    .card span {
-      font-weight: 400;
-    }
-
-    .left {
-      flex: 1;
-    }
-
+    .left { flex: 1; }
     .right {
       flex: 0 0 250px;
       border-radius: 10px;
@@ -112,27 +136,11 @@
       font-weight: bold;
     }
 
-    .right h2 {
-      font-size: 36px;
-      margin: 0;
-      font-weight: 700;
-    }
+    .right h2 { font-size: 36px; margin: 0; }
+    .right span { display: block; font-size: 14px; margin-top: 4px; }
 
-    .right span {
-      display: block;
-      font-size: 14px;
-      margin-top: 4px;
-      font-weight: 500;
-    }
-
-    .detalles {
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
-    .detalles p {
-      margin: 5px 0;
-    }
+    .detalles { margin-top: 10px; font-size: 14px; }
+    .detalles p { margin: 5px 0; }
 
     .clima {
       display: flex;
@@ -148,30 +156,29 @@
       gap: 5px;
     }
 
-    .emoji {
-      font-size: 18px;
-    }
+    .emoji { font-size: 18px; }
 
-    /* ======== LEYENDA DE COLORES ======== */
+    /* ======== LEYENDA ======== */
     .leyenda {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin: 40px auto;
-      width: 300px;
+      align-items: center;
+      margin: 50px auto;
+      width: 360px;
       border: 1px solid #ddd;
-      border-radius: 8px;
+      border-radius: 10px;
       background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 15px 20px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+      padding: 20px 25px;
     }
 
     .leyenda h3 {
       text-align: center;
-      width: 100%;
-      margin-bottom: 10px;
-      font-size: 14px;
+      margin-bottom: 15px;
+      font-size: 15px;
       text-transform: uppercase;
+      color: #0042A6;
+      letter-spacing: 0.5px;
     }
 
     .nivel {
@@ -180,14 +187,16 @@
       width: 100%;
       font-size: 13px;
       font-weight: 600;
-      margin: 3px 0;
+      margin: 5px 0;
+      color: #222;
     }
 
     .color-box {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       margin-right: 8px;
-      border-radius: 3px;
+      border-radius: 4px;
+      border: 1px solid #bbb;
     }
 
     .buena { background: #4CAF50; }
@@ -195,32 +204,71 @@
     .insalubre-sensibles { background: #FF9800; }
     .insalubre { background: #F44336; }
     .muy-insalubre { background: #7B1FA2; }
+
+    /* ======== FOOTER ======== */
+    footer {
+      background-color: #1b1b1b;
+      color: #ffffff;
+      text-align: center;
+      padding: 18px 0;
+      margin-top: 60px;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    footer strong {
+      color: #EAEF07;
+    }
   </style>
 </head>
 
 <body>
   <!-- ======== NAVBAR ======== -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="nasa2.png" alt="NextAir Logo">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">
+        <img src="nasa2.png" alt="NextAir Logo">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav mx-auto text-center">
+          <li class="nav-item"><a class="nav-link" href="Inicio.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa</a></li>
+          <li class="nav-item"><a class="nav-link" href="pronóstico.html">Pronóstico</a></li>
+          <li class="nav-item"><a class="nav-link" href="alertas.html">Alertas</a></li>
+        </ul>
+
+        <div class="dropdown text-end">
+          <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown">🌐 Idioma</button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('es')">Español</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('en')">Inglés</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('fr')">Francés</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('de')">Alemán</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('it')">Italiano</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('pt')">Portugués</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('zh-CN')">Chino</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('ja')">Japonés</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('ko')">Coreano</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('ar')">Árabe</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('ru')">Ruso</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <nav class="nav-links">
-      <a href="Inicio.html">Inicio</a>
-      <a href="mapa.html">Mapa</a>
-      <a href="pronostico.html">Pronóstico</a>
-      <a href="alertas.html">Alertas</a>
-    </nav>
-
-    <a href="#" class="btn-login">🌐 Idioma</a>
-  </header>
+  </nav>
 
   <!-- ======== CONTENIDO PRINCIPAL ======== -->
   <div class="container">
-    <h1 class="titulo">CALIDAD DE AIRE</h1>
-    <p class="descripcion">Índice de calidad del aire (ICA) y contaminación del aire</p>
+    <h1 class="titulo">CALIDAD DEL AIRE</h1>
+    <p class="descripcion">Índice de calidad del aire (ICA) y contaminación</p>
     <p id="fecha-hora">--:--, --- --</p>
 
+    <!-- ======== LEYENDA ======== -->
     <div class="leyenda">
       <h3>Estado de la calidad del aire</h3>
       <div class="nivel"><div class="color-box buena"></div> BUENA</div>
@@ -276,7 +324,7 @@
         <div class="detalles">
           <p><b>PERSONAS CON CARDIOPATÍAS O ENFERMEDADES PULMONARES, ADULTOS MAYORES, NIÑOS Y ADOLESCENTES</b></p>
           <p>Reducir las actividades que requieran esfuerzo prolongado o intenso.</p>
-          <P>Las personas asmáticas deben seguir sus planes de acción y tener a mano medicamentos de acción rápida.</P>
+          <p>Las personas asmáticas deben seguir sus planes de acción y tener a mano medicamentos de acción rápida.</p>
         </div>
         <div class="clima">
           <div><span class="emoji">🌥️</span> 29°C</div>
@@ -292,11 +340,11 @@
 
     <div class="card" style="background:#FFCDD2;">
       <div class="left">
-        <h2>INSALUBLE</h2>
+        <h2>INSALUBRE</h2>
         <div class="detalles">
           <p><b>TODOS</b></p>
-          <p><b>GRUPOS SENSIBLES: </b> Evitar actividades que requieran esfuerzo prolongado o intenso.</p>
-          <p><b>PARA EL RESTO DE LAS PERSONAS: </b> Reducir las actividades que requieran esfuerzo prolongado o intenso.</p>
+          <p><b>GRUPOS SENSIBLES:</b> Evitar actividades que requieran esfuerzo prolongado o intenso.</p>
+          <p><b>PARA EL RESTO DE LAS PERSONAS:</b> Reducir las actividades que requieran esfuerzo prolongado o intenso.</p>
         </div>
         <div class="clima">
           <div><span class="emoji">☁️</span> 28°C</div>
@@ -312,11 +360,11 @@
 
     <div class="card" style="background:#E1BEE7;">
       <div class="left">
-        <h2>MUY INSALUBLE</h2>
+        <h2>MUY INSALUBRE</h2>
         <div class="detalles">
           <p><b>TODOS</b></p>
-          <p><b>GRUPOS SENSIBLES: </b> Evitar todas las actividades físicas al aire libre.</p>
-          <p><b>PARA EL RESTO DE LAS PERSONAS: </b> Evitar las actividades que requieran esfuerzo prolongado o intenso.</p>
+          <p><b>GRUPOS SENSIBLES:</b> Evitar todas las actividades físicas al aire libre.</p>
+          <p><b>PARA EL RESTO DE LAS PERSONAS:</b> Evitar las actividades que requieran esfuerzo prolongado o intenso.</p>
         </div>
         <div class="clima">
           <div><span class="emoji">🌫️</span> 27°C</div>
@@ -331,19 +379,40 @@
     </div>
   </div>
 
-  <!-- ======== SCRIPT PARA HORA ======== -->
+  <div id="google_translate_element"></div>
+
+  <footer>
+    <p>© 2025 <strong>NextAir</strong> – Hackathon Project</p>
+  </footer>
+
+  <!-- === SCRIPTS === -->
   <script>
+    // Traductor
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+    }
+    function doTranslate(lang) {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+      }
+    }
+
+    // Hora actual
     function actualizarHora() {
       const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
       const ahora = new Date();
-      const horas = ahora.getHours().toString().padStart(2,'0');
-      const minutos = ahora.getMinutes().toString().padStart(2,'0');
-      const dia = ahora.getDate();
-      const mes = meses[ahora.getMonth()];
-      document.getElementById("fecha-hora").textContent = `${horas}:${minutos}, ${mes} ${dia}`;
+      const h = ahora.getHours().toString().padStart(2,'0');
+      const m = ahora.getMinutes().toString().padStart(2,'0');
+      const texto = `${h}:${m}, ${meses[ahora.getMonth()]} ${ahora.getDate()}`;
+      document.getElementById("fecha-hora").textContent = texto;
     }
     actualizarHora();
     setInterval(actualizarHora, 60000);
   </script>
+
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
