@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextAir</title>
-  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&family=Fira+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -13,221 +18,254 @@
       background-color: #ffffff;
     }
 
-    /* === NAVBAR === */
+    /* NAVBAR */
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 35px;
-      background: #0042A6; /* Electric Blue */
+      background-color: #0042A6 !important;
     }
 
-    .logo img {
-      height: 55px;
+    .navbar-brand img {
+      height: 50px;
     }
 
-    .nav-links a {
-      color: white;
-      margin: 0 12px;
-      text-decoration: none;
+    .nav-link {
+      color: white !important;
       font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
+      font-size: 14px;
+      margin: 0 10px;
     }
 
-    .nav-links a:hover {
-      color: #EAEF07; /* Neon Yellow */
+    .nav-link:hover {
+      color: #EAEF07 !important;
     }
 
-    /* === BOTÓN DESPLEGABLE === */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    /* Botón idioma */
     .dropbtn {
       background: #EAEF07;
       color: #000;
-      padding: 6px 14px;
       border: none;
       border-radius: 8px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 13px;
+      padding: 7px 15px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: 'Overpass', sans-serif;
     }
 
     .dropbtn:hover {
       background: #d8dc06;
     }
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: #ffffff;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      border-radius: 8px;
-      z-index: 10;
-      overflow-y: auto;
-      max-height: 200px;
-    }
-
-    .dropdown-content a {
-      color: #000;
-      padding: 8px 12px;
-      text-decoration: none;
-      display: block;
+    .dropdown-menu a {
+      font-size: 13px;
       font-weight: 600;
-      font-size: 12px;
+      color: #000;
     }
 
-    .dropdown-content a:hover {
+    .dropdown-menu a:hover {
       background-color: #f1f1f1;
     }
 
-    .show {
-      display: block;
+    #google_translate_element {
+      display: none;
     }
 
-    #google_translate_element { display: none; }
-
-    /* === CONTENIDO PRINCIPAL === */
-    #contenido {
-      display: block;
-      padding: 20px 30px;
-      max-width: 550px;
-      margin-left: 40px;
-      text-align: left;
-      line-height: 1.5;
+    /* Contenido */
+    section {
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
     }
 
-    #contenido h1 {
-      font-size: 16px;
+    section h1 {
       color: #0042A6;
+      font-size: 18px;
       margin-bottom: 10px;
     }
 
-    #contenido h2 {
-      font-size: 13px;
+    section h2 {
       color: #0070f3;
-      font-weight: 600;
+      font-size: 15px;
       margin-bottom: 12px;
+      font-weight: 600;
     }
 
-    #contenido p {
-      font-size: 11.5px;
+    section p {
+      font-size: 13px;
       color: #333;
-      margin-bottom: 8px;
       text-align: justify;
-      max-width: 520px;
-    }
-
-    .btn-descargar {
-      display: inline-block;
-      margin: 6px 6px 0 0;
-      padding: 6px 14px;
-      font-weight: bold;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s;
-      font-size: 11px;
-    }
-
-    .btn-azul {
-      background: #0042A6;
-      color: white;
-    }
-
-    .btn-azul:hover {
-      background: #002f73;
-    }
-
-    .btn-blanco {
-      border: 2px solid #000;
-      color: #000;
-      background: #fff;
-    }
-
-    .btn-blanco:hover {
-      background: #f1f1f1;
     }
   </style>
 </head>
 
 <body>
-  <!-- === BARRA SUPERIOR === -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="nasa2.png" alt="NextAir Logo">
+  <!-- === NAVBAR === -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">
+        <img src="nasa2.png" alt="NextAir Logo">
+      </a>
+
+        <!-- Botón hamburguesa -->
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<!-- Contenedor del menú -->
+<div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+  <!-- Menú visible solo en pantallas pequeñas -->
+  <ul class="navbar-nav mx-auto text-center d-lg-none py-3 w-100"
+      style="background-color:#0960E1; position:absolute; top:100%; left:0; z-index:999; border-top:2px solid rgba(255,255,255,0.2);">
+    <li class="nav-item"><a class="nav-link text-white" href="Inicio.html">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="mapa.html">Mapa</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="pronóstico.html">Pronóstico</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="alertas.html">Alertas</a></li>
+
+    <!-- Botón de idioma -->
+    <li class="nav-item mt-3">
+      <div class="dropdown text-center ">
+        <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown"
+        style="background-color: #EAEF07; color: blac; border: none; padding: 8px 16px; border-radius: 6px;">
+          🌐 Idioma
+        </button>
+        <ul class="dropdown-menu text-center">
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('es')">Español</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('en')">Inglés</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('fr')">Francés</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('de')">Alemán</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('it')">Italiano</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('pt')">Portugués</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('zh-CN')">Chino</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('ja')">Japonés</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('ko')">Coreano</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('ar')">Árabe</a></li>
+          <li><a class="dropdown-item" href="#" onclick="doTranslate('ru')">Ruso</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <style>
+  /* Mantiene el estilo del botón amarillo neón */
+  .dropbtn {
+    background-color: #EAEF07;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  /* Asegura que el menú se despliegue justo debajo del botón */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute !important;
+    top: 100%;              /* Justo debajo del botón */
+    left: 50%;              /* Centrado respecto al botón */
+    transform: translateX(0%);
+    z-index: 1050;
+    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* En pantallas grandes, el menú se comporta igual */
+  @media (min-width: 992px) {
+    .navbar-nav.d-lg-none {
+      display: none !important;
+    }
+  }
+</style>
+
+  <!-- Menú original (solo visible en pantallas grandes) -->
+  <ul class="navbar-nav mx-auto text-center d-none d-lg-flex">
+    <li class="nav-item"><a class="nav-link" href="Inicio.html">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa</a></li>
+    <li class="nav-item"><a class="nav-link" href="pronóstico.html">Pronóstico</a></li>
+    <li class="nav-item"><a class="nav-link" href="alertas.html">Alertas</a></li>
+  </ul>
+
+  <!-- Botón idioma escritorio -->
+  <div class="dropdown text-end d-none d-lg-block">
+    <ul class="navbar-nav text-center">
+      <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown">
+        🌐 Idioma
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('es')">Español</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('en')">Inglés</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('fr')">Francés</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('de')">Alemán</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('it')">Italiano</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('pt')">Portugués</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('zh-CN')">Chino</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('ja')">Japonés</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('ko')">Coreano</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('ar')">Árabe</a></li>
+        <li><a class="dropdown-item" href="#" onclick="doTranslate('ru')">Ruso</a></li>
+      </ul>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </nav>
+<!-- === SECCIÓN DESCRIPCIÓN DEL PROYECTO === -->
+<div class="container my-5">
+  <div class="row align-items-center">
+    
+    <!-- Lado Izquierdo: Descripción -->
+    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+      <h2 class="text-secondary fw-semibold mb-3">Ozono</h2>
+      <p class="text-justify">
+        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
+        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
+        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
+        y contribuir a la salud pública mediante tecnología de vanguardia.
+      </p>
+      <h2 class="text-secondary fw-semibold mb-3">Dióxido de nitrógeno (NO2) PM2.5</h2>
+      <p class="text-justify">
+        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
+        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
+        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
+        y contribuir a la salud pública mediante tecnología de vanguardia.
+      </p>
+      <h2 class="text-secondary fw-semibold mb-3">PM2.5</h2>
+      <p class="text-justify">
+        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
+        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
+        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
+        y contribuir a la salud pública mediante tecnología de vanguardia.
+      </p>
+      <p class="fw-bold text-dark mt-4">
+        👩‍💻 Desarrollado por: Equipo NextAir – NASA Space Apps Challenge
+      </p>
     </div>
 
-    <nav class="nav-links">
-      <a href="Inicio.html" >Inicio</a>
-      <a href="mapa.html">Mapa</a>
-      <a href="pronóstico.html">Pronóstico</a>
-      <a href="al">Alertas</a>
-    </nav>
-      
-    <!-- Botón desplegable de idiomas -->
-    <div class="dropdown">
-      <button onclick="toggleDropdown()" class="dropbtn">🌐 Idioma</button>
-      <div id="languageDropdown" class="dropdown-content">
-        <a href="#" onclick="doTranslate('es')">Español</a>
-        <a href="#" onclick="doTranslate('en')">Inglés</a>
-        <a href="#" onclick="doTranslate('fr')">Francés</a>
-        <a href="#" onclick="doTranslate('de')">Alemán</a>
-        <a href="#" onclick="doTranslate('it')">Italiano</a>
-        <a href="#" onclick="doTranslate('pt')">Portugués</a>
-        <a href="#" onclick="doTranslate('zh-CN')">Chino</a>
-        <a href="#" onclick="doTranslate('ja')">Japonés</a>
-        <a href="#" onclick="doTranslate('ko')">Coreano</a>
-        <a href="#" onclick="doTranslate('ar')">Árabe</a>
-        <a href="#" onclick="doTranslate('ru')">Ruso</a>
-      </div>
+    <!-- Lado Derecho: Imagen -->
+    <div class="col-lg-6 col-md-12 d-flex justify-content-lg-end justify-content-center">
+      <img src="nextair.png" 
+           alt="NextAir Imagen" 
+           class="img-fluid rounded shadow"
+           style="max-width: 70%; height: auto;">
     </div>
-  </header>
+
+  </div>
+</div>
 
   <!-- Elemento oculto del traductor -->
   <div id="google_translate_element"></div>
 
-  <!-- === CONTENIDO PRINCIPAL === -->
-  <section id="contenido">
-    <h1>¿Qué es el Índice de calidad del aire (ICA)? ¿Cómo se calcula?</h1>
-    <h2>El índice de calidad del aire (ICA) es un indicador que permite informar de la calidad del aire a la población de una manera clara, sencilla y unificada.</h2>
-    <p>Además, permite comparar la calidad del aire entre diferentes zonas, al tener criterios homogéneos que unifican su cálculo.</p>
-    <p>Las estaciones Kunak AIR permiten una <b>monitorización ambiental precisa</b> y en tiempo real de los principales contaminantes con un coste menor a los métodos tradicionales.</p>
-    <P>El Índice de Calidad del Aire (ICA) es un indicador que traduce los niveles de contaminación del aire en una escala comprensible para el público. Su objetivo es informar de forma clara y rápida sobre qué tan saludable es el aire que respiramos en un lugar determinado.</P>
-    <P>El ICA se basa en la concentración de cinco contaminantes principales:</P>
 
-  </section>
 
+  <!-- === Scripts === -->
   <script>
-    // Mostrar/ocultar menú de idiomas
-    function toggleDropdown() {
-      document.getElementById("languageDropdown").classList.toggle("show");
-    }
-
-    // Cerrar menú si se hace clic fuera
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-          dropdowns[i].classList.remove('show');
-        }
-      }
-    }
-
-    // Inicializar Google Translate
+    // Google Translate
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
     }
 
-    // Traducir automáticamente al idioma seleccionado
     function doTranslate(lang) {
       const combo = document.querySelector(".goog-te-combo");
       if (combo) {
@@ -239,14 +277,14 @@
     }
   </script>
 
-  <!-- Carga el traductor -->
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- === FOOTER === -->
+<footer class="text-center py-3 mt-5" style="background-color: #1b1b1b; color: #ffffff;">
+  <div class="container">
+    <p class="mb-0">© 2025 <strong>NextAir</strong> – Hackathon Project</p>
+  </div>
+</footer>
+
 </body>
 </html>
-
-
-
-
-
-
-
