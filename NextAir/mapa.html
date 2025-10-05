@@ -1,170 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextAir - Mapa</title>
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Estilos propios -->
   <link href="mapa.css" rel="stylesheet">
 </head>
-<body>
 
-  <!-- === NAVBAR (USANDO TU MENÚ ANTERIOR) === -->
+<body>
+  <!-- === NAVBAR === -->
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid px-4">
       <a class="navbar-brand" href="#">
         <img src="nasa2.png" alt="NextAir Logo">
       </a>
 
-      <!-- Botón hamburguesa -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Contenedor del menú -->
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-
-        <!-- Menú visible solo en pantallas pequeñas -->
-        <ul class="navbar-nav mx-auto text-center d-lg-none py-3 w-100"
-            style="background-color:#0960E1; position:absolute; top:100%; left:0; z-index:999; border-top:2px solid rgba(255,255,255,0.2);">
-          <li class="nav-item"><a class="nav-link text-white" href="Inicio.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="mapa.html">Mapa</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="pronóstico.html">Pronóstico</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="alertas.html">Alertas</a></li>
-
-          <!-- Botón de idioma (móvil) -->
-          <li class="nav-item mt-3">
-            <div class="dropdown text-center ">
-              <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown"
-                      style="background-color: #EAEF07; color: black; border: none; padding: 8px 16px; border-radius: 6px;">
-                🌐 Idioma
-              </button>
-              <ul class="dropdown-menu text-center">
-                <li><a class="dropdown-item" href="#" data-lang="es" onclick="doTranslate('es')">Español</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="en" onclick="doTranslate('en')">Inglés</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="fr" onclick="doTranslate('fr')">Francés</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="de" onclick="doTranslate('de')">Alemán</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="it" onclick="doTranslate('it')">Italiano</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="pt" onclick="doTranslate('pt')">Portugués</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="zh-CN" onclick="doTranslate('zh-CN')">Chino</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="ja" onclick="doTranslate('ja')">Japonés</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="ko" onclick="doTranslate('ko')">Coreano</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="ar" onclick="doTranslate('ar')">Árabe</a></li>
-                <li><a class="dropdown-item" href="#" data-lang="ru" onclick="doTranslate('ru')">Ruso</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Menú original (solo visible en pantallas grandes) -->
         <ul class="navbar-nav mx-auto text-center d-none d-lg-flex">
           <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa</a></li>
-          <li class="nav-item"><a class="nav-link" href="pronóstico.html">Pronóstico</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Mapa</a></li>
+          <li class="nav-item"><a class="nav-link" href="pronostico.html">Pronóstico</a></li>
           <li class="nav-item"><a class="nav-link" href="alertas.html">Alertas</a></li>
         </ul>
 
-        <!-- Botón idioma escritorio -->
+        <!-- Botón idioma -->
         <div class="dropdown text-end d-none d-lg-block">
-          <ul class="navbar-nav text-center">
-            <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown">
-              🌐 Idioma
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#" data-lang="es" onclick="doTranslate('es')">Español</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="en" onclick="doTranslate('en')">Inglés</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="fr" onclick="doTranslate('fr')">Francés</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="de" onclick="doTranslate('de')">Alemán</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="it" onclick="doTranslate('it')">Italiano</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="pt" onclick="doTranslate('pt')">Portugués</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="zh-CN" onclick="doTranslate('zh-CN')">Chino</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="ja" onclick="doTranslate('ja')">Japonés</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="ko" onclick="doTranslate('ko')">Coreano</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="ar" onclick="doTranslate('ar')">Árabe</a></li>
-              <li><a class="dropdown-item" href="#" data-lang="ru" onclick="doTranslate('ru')">Ruso</a></li>
-            </ul>
+          <button class="dropbtn dropdown-toggle" data-bs-toggle="dropdown">🌐 Idioma</button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('es')">Español</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('en')">Inglés</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('fr')">Francés</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('de')">Alemán</a></li>
+            <li><a class="dropdown-item" href="#" onclick="doTranslate('pt')">Portugués</a></li>
           </ul>
         </div>
-
       </div>
     </div>
   </nav>
 
-  <!-- === FILTROS + MAPA VACÍO + LEYENDA === -->
-  <div class="container my-3">
-    <div class="row g-3 align-items-end filtros-container">
-      <div class="col-auto">
-        <label for="fecha" class="form-label">Fecha</label>
-        <input id="fecha" type="date" class="form-control"/>
-      </div>
-      <div class="col-auto">
-        <label for="hora" class="form-label">Hora</label>
-        <input id="hora" type="time" class="form-control"/>
-      </div>
+  <!-- === CONTENIDO PRINCIPAL === -->
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <!-- === FILTROS === -->
+      <div class="col-lg-3 col-md-4 mb-4 filtros">
+        <h5 class="fw-bold mb-3">Filtros de búsqueda</h5>
 
-      <div class="col-auto">
-        <label class="form-label">Contaminante</label>
-        <div class="dropdown">
-          <button id="dropdownContaminantes" class="btn btn-secondary dropdown-toggle text-truncate" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Seleccionar contaminantes">
-            Seleccionar contaminantes
-          </button>
-          <ul class="dropdown-menu p-2 contaminantes-lista" style="min-width:230px;">
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="PM2.5" data-nombre="Material Particulado 2.5" id="cPM25"><label class="form-check-label" for="cPM25">PM2.5 — Material Particulado 2.5</label></div></li>
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="PM10" data-nombre="Material Particulado 10" id="cPM10"><label class="form-check-label" for="cPM10">PM10 — Material Particulado 10</label></div></li>
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="O₃" data-nombre="Ozono" id="cO3"><label class="form-check-label" for="cO3">O₃ — Ozono</label></div></li>
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="NO₂" data-nombre="Dióxido de Nitrógeno" id="cNO2"><label class="form-check-label" for="cNO2">NO₂ — Dióxido de Nitrógeno</label></div></li>
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="SO₂" data-nombre="Dióxido de Azufre" id="cSO2"><label class="form-check-label" for="cSO2">SO₂ — Dióxido de Azufre</label></div></li>
-            <li><div class="form-check compact"><input class="form-check-input contaminante-checkbox" type="checkbox" value="CO" data-nombre="Monóxido de Carbono" id="cCO"><label class="form-check-label" for="cCO">CO — Monóxido de Carbono</label></div></li>
+        <label class="fw-semibold">Selecciona contaminantes:</label>
+        <div id="contaminante" class="dropdown-checklist">
+          <button class="dropdown-checklist-btn" id="selectedContaminantes">Seleccionar contaminantes</button>
+          <div class="dropdown-checklist-content">
+            <label><input type="checkbox" value="PM2.5"> PM2.5 – Material Particulado Fino</label>
+            <label><input type="checkbox" value="NO₂"> NO₂ – Dióxido de Nitrógeno</label>
+            <label><input type="checkbox" value="O₃"> O₃ – Ozono</label>
+            <label><input type="checkbox" value="CO₂"> CO₂ – Dióxido de Carbono</label>
+            <label><input type="checkbox" value="HCHO"> HCHO – Formaldehído</label>
+          </div>
+        </div>
+
+        <label class="fw-semibold mt-3">Fecha:</label>
+        <input type="date" id="fecha" class="form-control">
+
+        <label class="fw-semibold mt-3">Hora:</label>
+        <input type="time" id="hora" class="form-control">
+
+        <button id="btnActualizar" class="btn btn-primary mt-3 w-100" disabled>Actualizar Mapa</button>
+
+        <!-- Leyenda -->
+        <div class="legend mt-4">
+          <h6 class="fw-bold">Leyenda de Niveles de Calidad del Aire</h6>
+          <ul class="list-unstyled">
+            <li><span class="color-box" style="background:green;"></span> Buena (0-50)</li>
+            <li><span class="color-box" style="background:yellow;"></span> Moderada (51-100)</li>
+            <li><span class="color-box" style="background:orange;"></span> Insalubre grupos sensibles (101-150)</li>
+            <li><span class="color-box" style="background:red;"></span> Insalubre (151-200)</li>
+            <li><span class="color-box" style="background:purple;"></span> Muy insalubre (201-300)</li>
           </ul>
         </div>
       </div>
 
-      <div class="col-auto">
-        <button id="btnActualizar" class="btn btn-warning">Actualizar Mapa</button>
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <!-- Mapa vacío (usuario pidió "vacío") -->
-      <div class="col-lg-9 col-12 mb-3">
-        <div id="mapaExterno" class="mapa-vacio d-flex align-items-center justify-content-center">
-          <p class="text-muted m-0">🗺️ Aquí insertarás tu mapa desde otra fuente</p>
-        </div>
-      </div>
-
-      <!-- Leyenda -->
-      <div class="col-lg-3 col-12">
-        <div class="leyenda p-3 rounded shadow-sm">
-          <h5 class="text-center">Leyenda - Calidad del Aire</h5>
-          <ul class="list-unstyled mt-2">
-            <li><span class="color-box" style="background:green"></span> Buena (0–50 µg/m³)</li>
-            <li><span class="color-box" style="background:yellow"></span> Moderada (51–100 µg/m³)</li>
-            <li><span class="color-box" style="background:orange"></span> Insalubre (grupos sensibles) (101–150 µg/m³)</li>
-            <li><span class="color-box" style="background:red"></span> Insalubre (151–200 µg/m³)</li>
-            <li><span class="color-box" style="background:purple"></span> Muy insalubre (201–300 µg/m³)</li>
-          </ul>
-
-          <h6 class="mt-3">Resultados:</h6>
-          <div class="resultados" style="max-height:300px; overflow-y:auto;"></div>
-        </div>
+      <!-- === MAPA Y RESULTADOS === -->
+      <div class="col-lg-9 col-md-8">
+        <div id="map" class="map-container"></div>
+        <div class="resultados mt-3 p-3 border rounded bg-light"></div>
       </div>
     </div>
   </div>
 
-  <!-- Elemento oculto necesario para Google Translate (lo dejamos fuera del flujo visual) -->
-  <div id="google_translate_element" style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;"></div>
+  <!-- Traductor oculto -->
+  <div id="google_translate_element"></div>
 
-  <!-- Scripts: mapa.js debe cargarse antes de la librería de Google para que exista la callback -->
+  <!-- FOOTER -->
+  <footer class="text-center py-3 mt-5" style="background-color: #1b1b1b; color: #fff;">
+    © 2025 <strong>NextAir</strong> – Hackathon Project
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src="mapa.js"></script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
