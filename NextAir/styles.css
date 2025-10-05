@@ -38,3 +38,19 @@ body {
 .btn-login:hover {
   background: #d4d900; /* tono más oscuro del amarillo */
 }
+
+  /* El dropdown flota sin desplazar el fondo neon blue */
+  .dropdown-menu {
+    position: absolute !important;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+  }
+
+  /* El fondo neon blue solo aparece en pantallas pequeñas */
+  @media (min-width: 992px) {
+    .navbar-nav.d-lg-none {
+      display: none !important;
+    }
+  }
