@@ -93,6 +93,8 @@
       color: #333;
       text-align: justify;
     }
+    
+
   </style>
 </head>
 
@@ -115,7 +117,7 @@
   <!-- Menú visible solo en pantallas pequeñas -->
   <ul class="navbar-nav mx-auto text-center d-lg-none py-3 w-100"
       style="background-color:#0960E1; position:absolute; top:100%; left:0; z-index:999; border-top:2px solid rgba(255,255,255,0.2);">
-    <li class="nav-item"><a class="nav-link text-white" href="Inicio.html">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="mapa.html">Mapa</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="pronóstico.html">Pronóstico</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="alertas.html">Alertas</a></li>
@@ -166,8 +168,7 @@
     transform: translateX(0%);
     z-index: 1050;
     min-width: 180px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   /* En pantallas grandes, el menú se comporta igual */
@@ -180,7 +181,7 @@
 
   <!-- Menú original (solo visible en pantallas grandes) -->
   <ul class="navbar-nav mx-auto text-center d-none d-lg-flex">
-    <li class="nav-item"><a class="nav-link" href="Inicio.html">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
     <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa</a></li>
     <li class="nav-item"><a class="nav-link" href="pronóstico.html">Pronóstico</a></li>
     <li class="nav-item"><a class="nav-link" href="alertas.html">Alertas</a></li>
@@ -211,47 +212,139 @@
 
     </div>
   </nav>
-<!-- === SECCIÓN DESCRIPCIÓN DEL PROYECTO === -->
+  <!-- === SECCIÓN DESCRIPCIÓN DEL PROYECTO === -->
 <div class="container my-5">
   <div class="row align-items-center">
     
-    <!-- Lado Izquierdo: Descripción -->
+    <!-- LADO IZQUIERDO: Descripción -->
     <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-      <h2 class="text-secondary fw-semibold mb-3">Ozono</h2>
-      <p class="text-justify">
-        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
-        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
-        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
-        y contribuir a la salud pública mediante tecnología de vanguardia.
-      </p>
-      <h2 class="text-secondary fw-semibold mb-3">Dióxido de nitrógeno (NO2) PM2.5</h2>
-      <p class="text-justify">
-        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
-        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
-        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
-        y contribuir a la salud pública mediante tecnología de vanguardia.
-      </p>
-      <h2 class="text-secondary fw-semibold mb-3">PM2.5</h2>
-      <p class="text-justify">
-        <strong>NextAir</strong> es un proyecto innovador que integra datos satelitales de la NASA 
-        para ofrecer información precisa sobre la calidad del aire, pronósticos meteorológicos 
-        y alertas ambientales. Su objetivo es mejorar la comprensión del entorno atmosférico 
-        y contribuir a la salud pública mediante tecnología de vanguardia.
-      </p>
-      <p class="fw-bold text-dark mt-4">
+      <h2 class="fw-semibold mb-3"  style="color: #07173f">
+        RESPIRA MEJOR, VIVE MEJOR
+      </h2>
+        <p class="text-justify">
+        <strong>Según la OMS, el 99% de la población mundial respira aire que supera los límites recomendados.
+        </strong>
+        </p>
+        <p class="text-justify">
+        <strong>En días de alta contaminación, se recomienda reducir la actividad física al aire libre y priorizar espacios cerrados bien ventilados.
+        </strong>
+        </p>
+        <p class="text-justify">
+        <strong>Los niños, ancianos y personas con enfermedades respiratorias son más vulnerables.
+        </strong>
+        </p>
+
+      <h2 class="text-secondary fw-semibold mb-3 fs-4">
+        Dióxido de Nitrógeno (NO₂)
+        </h2>
+
+        <p class="text-justify" style="font-size: 0.9rem;">
+        Es un gas que proviene principalmente de la quema de combustibles fósiles, 
+        como los de los vehículos y en centrales eléctricas e industriales. 
+        Es un contaminante primario que puede irritar las vías respiratorias 
+        y agravar enfermedades como el asma.
+        <p><strong>Ejemplos : </strong>La combustión de los motores de los coches y la emisión de las 
+        chimeneas de las fábricas son fuentes de NO2.</p>
+        
+        <p><h2 class="text-secondary fw-semibold mb-3 fs-4">Formaldehído (CH₂O o HCHO)</h2></p>
+        <p class="text-justify" style="font-size: 0.9rem;">
+         El formaldehído es un compuesto orgánico volátil presente en numerosos procesos 
+         industriales y productos de uso cotidiano; también se genera naturalmente al 
+         descomponerse la materia orgánica. Es altamente irritante para ojos, nariz, 
+         garganta y piel, y su exposición prolongada se asocia con un mayor riesgo de 
+         cáncer nasofaríngeo.
+
+        <p><strong>Ejemplos : </strong>Se encuentra en pegamentos, textiles y puede emitirse 
+            de pinturas y materiales de construcción.</p>
+
+        <p><h2 class="text-secondary fw-semibold mb-3 fs-4">Índice de Aerosoles (IA)</h2></p>
+        <p class="text-justify" style="font-size: 0.9rem;">
+         No es un contaminante en sí, sino una medida de la concentración y el tamaño de las 
+         partículas sólidas o líquidas presentes en el aire. También se le llama Índice de Calidad 
+         del Aire (ICA) y es una forma sencilla de entender la contaminación atmosférica en un 
+         momento dado.
+
+        <p><strong>Ejemplos : </strong>Un IA elevado indica que hay muchas partículas suspendidas 
+            en el aire, lo que reduce la visibilidad y puede generar problemas de salud.</p>
+      
+       <p><h2 class="text-secondary fw-semibold mb-3 fs-4">Materia Particulada (PM) </h2></p>
+        <p class="text-justify" style="font-size: 0.9rem;">
+         Son partículas sólidas o líquidas suspendidas en el aire, como polvo, humo, polen y hollín. 
+         Se clasifican por su tamaño, como las PM10 (partículas más grandes) y 
+         las PM2.5 (partículas finas, más peligrosas porque pueden llegar a lo más profundo 
+         de los pulmones).
+
+        <p><strong>Ejemplos : </strong>El humo de un cigarrillo, el polvo de una obra, 
+            el polen y la niebla son formas de materia particulada.</p>
+         
+         <p><h2 class="text-secondary fw-semibold mb-3 fs-4">Ozono (O₃) </h2></p>
+        <p class="text-justify" style="font-size: 0.9rem;">
+         A diferencia del ozono que nos protege en la estratosfera, el ozono a nivel del suelo 
+         es un gas contaminante que se forma por la reacción de otros contaminantes 
+         (como los óxidos de nitrógeno) con la luz solar. Es un irritante para los ojos y 
+         el sistema respiratorio.
+
+        <p><strong>Ejemplos : </strong>Se forma sobre las ciudades en días soleados 
+            por la acción de los rayos del sol sobre la contaminación industrial y vehicular.</p>
+            
+            
+           <!-- <p class="fw-bold text-dark mt-4">
         👩‍💻 Desarrollado por: Equipo NextAir – NASA Space Apps Challenge
-      </p>
+      </p>-->
     </div>
 
-    <!-- Lado Derecho: Imagen -->
-    <div class="col-lg-6 col-md-12 d-flex justify-content-lg-end justify-content-center">
-      <img src="nextair.png" 
-           alt="NextAir Imagen" 
-           class="img-fluid rounded shadow"
-           style="max-width: 70%; height: auto;">
+    <!-- LADO DERECHO: Tarjeta + Imagen -->
+    <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center justify-content-center">
+      
+  <!-- Tarjeta con fondo azul y texto neón amarillo -->
+ <!--<div class="card shadow-lg rounded-4 p-4 text-center mb-4"
+     style="max-width: 70%; 
+            height: auto; 
+            background-color: #0066ff; /* Azul sólido */
+            color: #ffff33; /* Amarillo neón */
+            border: 2px solid #00bfff;">
+  <h4 class="mb-3">Consejos para mejorar la calidad del aire 🌍</h4>
+  <p class="mb-2">Evita actividades al aire libre entre las <b>12:00 y 17:00</b>.</p>
+  <p class="mb-2">Usa <b>mascarillas N95</b> en días de mala calidad del aire.</p>
+  <p class="mb-2">Planta árboles o cuida las <b>áreas verdes</b> cercanas.</p>
+  <p>Prefiere el <b>transporte público</b> o bicicleta para reducir emisiones.</p>
+</div>-->
+
+
+<!-- Imagen -->
+<style>
+  .responsive-img {
+    width: 80%;          /* Tamaño ajustable */
+    max-width: 600px;    /* Tamaño máximo */
+    height: auto;
+    display: block;
+  }
+
+  /* 🔹 En pantallas pequeñas, la imagen se centra automáticamente */
+  @media (max-width: 768px) {
+    .responsive-img {
+      margin: 0 auto;    /* Centra horizontalmente */
+    }
+    .d-flex {
+      justify-content: center !important; /* Asegura que no quede a la derecha */
+    }
+  }
+</style>
+
+<div class="d-flex justify-content-end">
+  <img src="nextair.png" 
+       alt="NextAir Imagen" 
+       class="img-fluid rounded shadow responsive-img">
+</div>
+
+
+
+
     </div>
 
   </div>
+</div>
+
 </div>
 
   <!-- Elemento oculto del traductor -->
